@@ -13,8 +13,10 @@ function GoogleLogin() {
 }
 
 function showUserData(user){
-  //document.getElementById('user_name').innerHTML = `Hola, ${user.displayName}`
+  document.getElementById('profile_name').innerHTML = `${user.displayName}`
   document.getElementById('user_image_div').innerHTML = `<img src="${user.photoURL}" class="user-image">`
+  document.getElementById('profile_image').innerHTML = `<img src="${user.photoURL}" class="user-profile-image">`
+
 }
 
 function checkAuthState(){
@@ -24,7 +26,8 @@ function checkAuthState(){
       document.getElementById('nonuser_head').style.display="none";
       showUserData(user)
     }else{
-
+    alertMessage(type="danger", "You're logged out!")
+    setTimeout(() => { window.location.replace("./index.html"); }, 2000);
     }
   })
 }
@@ -33,7 +36,7 @@ function LogoutUser() {
   firebase.auth().signOut().then(()=>{
     document.getElementById('user_head').style.display="none";
     document.getElementById('nonuser_head').style.display="flex";
-    alertMessage(type="success", "You're logged out!")
+    setTimeout(() => { window.location.replace("./index.html"); }, 2000);
   }).catch((e)=>{
     console.log(e)
   })
