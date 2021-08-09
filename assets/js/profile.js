@@ -1,7 +1,9 @@
 var provider = new firebase.auth.GoogleAuthProvider();
 
-document.getElementById('login').addEventListener('click', GoogleLogin)
-document.getElementById('logout').addEventListener('click', LogoutUser)
+document.getElementById('login').addEventListener('click', GoogleLogin);
+document.getElementById('logout').addEventListener('click', LogoutUser);
+document.getElementById('profilelogout').addEventListener('click', LogoutUser);
+
 
 function GoogleLogin() {
   firebase.auth().signInWithPopup(provider).then(res=>{
@@ -41,4 +43,6 @@ function LogoutUser() {
     console.log(e)
   })
 }
+
+
 checkAuthState()

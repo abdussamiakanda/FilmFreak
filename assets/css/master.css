@@ -176,7 +176,7 @@ section{
 /* PROFILE */
 
 .user-profile{
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 }
@@ -188,6 +188,10 @@ section{
   height: 100%;
   border-radius: 5px;
   margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .profile-right{
   width: 75%;
@@ -214,7 +218,9 @@ section{
   font-size: 20px;
   margin: 10px 0px;
 }
-
+.profile-menu{
+  width: 100%;
+}
 .menu-item{
   padding: 5px;
   color: var(--no4);
@@ -230,21 +236,23 @@ section{
   text-decoration: none;
 }
 
-.profile-menu{
-}
-
 /* FILMS */
 
 .section-header{
   font-weight: bold;
   padding: 10px;
   font-size: 20px;
+  padding: 5px 10px;
+  color: var(--no4);
+  background-color: var(--no1);
+  border-radius: 5px;
 }
 
-.new-films{
+.films{
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 10px;
 }
 
 .film{
@@ -271,6 +279,7 @@ section{
 .film:hover h2{
   opacity: 1;
 }
+
 
 
 /* ALERTS */
