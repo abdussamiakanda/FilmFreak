@@ -123,6 +123,7 @@ section{
   display: none;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
 }
 .user-image{
   height: 40px;
@@ -171,6 +172,7 @@ section{
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
 }
 
 /* PROFILE */
