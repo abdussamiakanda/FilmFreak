@@ -3,7 +3,7 @@
 const API_KEY = "api_key=bef5eb55028208771a057a3a652b8632";
 const BASE_URL = "https://api.themoviedb.org/3"
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
-const HIGH_URL = BASE_URL + "/discover/movie/?certification_country=US&certification=R&sort_by=vote_average.desc&" + API_KEY;
+const HIGH_URL = BASE_URL + "/discover/movie?certification_country=US&certification=R&sort_by=vote_average.desc&" + API_KEY;
 const POPULAR_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
 
 
