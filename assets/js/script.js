@@ -1,3 +1,57 @@
+//themoviedb
+
+const API_KEY = "api_key=bef5eb55028208771a057a3a652b8632";
+const BASE_URL = "https://api.themoviedb.org/3"
+const IMG_URL = "https://image.tmdb.org/t/p/w500";
+const HIGH_URL = BASE_URL + "/discover/movie/?certification_country=US&certification=R&sort_by=vote_average.desc&" + API_KEY;
+const POPULAR_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
+const R_URL = BASE_URL + "/discover/movie/?certification_country=US&certification=R&sort_by=vote_average.desc&" + API_KEY;
+
+
+const popular = document.getElementById('popular_films');
+const highrated = document.getElementById('high_rated_films');
+const rrated = document.getElementById('r_rated_films');
+
+
+getFilms(POPULAR_URL,popular);
+getFilms(HIGH_URL,highrated);
+getFilms(R_URL,rrated);
+
+function getFilms(url,divId){
+  fetch(url).then(res => res.json()).then(data =>{
+    showFilms(data.results,divId);
+  })
+}
+
+function showFilms(data,divId){
+  divId.innerHTML = '';
+  data.forEach(movie => {
+    const {title, poster_path, vote_average, overview} = movie;
+    const filmEl = document.createElement('div');
+    filmEl.classList.add('film');
+    filmEl.innerHTML = `
+    <img src="${IMG_URL+poster_path}" alt="${title}">
+    <div class="film-info">
+      <h4>${title}</h4>
+      <span class="${getColor(vote_average)}">${vote_average}</span>
+    </div>
+    <div class="overview">
+      <h4 style="margin: 0;">Overview</h4>
+      ${overview}
+    </div>
+    `
+    divId.appendChild(filmEl);
+  })
+}
+
+function getColor(vote){
+  if(vote>=7){
+    return 'green'
+  }else{
+    return 'orange'
+  }
+}
+
 function alertMessage(type="success", message){
     let x = document.getElementById("alerts")
     let content = ``
@@ -15,24 +69,4 @@ function alertMessage(type="success", message){
                 ${message}`
         x.innerHTML = content;
     }
-}
-
-function parseURLData(url) {
-    var queryStart = url.indexOf("?") + 1,
-        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
-        query = url.slice(queryStart, queryEnd - 1),
-        pairs = query.replace(/\+/g, " ").split("&"),
-        parms = {}, i, n, v, nv;
-
-    if (query === url || query === "") return;
-
-    for (i = 0; i < pairs.length; i++) {
-        nv = pairs[i].split("=", 2);
-        n = decodeURIComponent(nv[0]);
-        v = decodeURIComponent(nv[1]);
-
-        if (!parms.hasOwnProperty(n)) parms[n] = [];
-        parms[n].push(nv.length === 2 ? v : null);
-    }
-    return parms;
 }

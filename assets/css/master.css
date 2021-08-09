@@ -9,6 +9,7 @@ body{
   font-family: 'Chakra Petch';
   background-color: var(--no1);
   color: var(--no4);
+  font-size: 20px;
   margin: 0;
   padding: 0;
 }
@@ -17,7 +18,7 @@ body{
 /* HEADER */
 
 section{
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 10px;
 }
@@ -26,7 +27,7 @@ section{
   position: fixed;
   top: 0;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   z-index: 10;
 }
 
@@ -41,7 +42,7 @@ section{
 
 .logo{
   font-family: 'Anton', sans-serif;
-  font-size: 25px;
+  font-size: 35px;
   font-weight: bold;
 }
 .logo a{
@@ -62,7 +63,7 @@ section{
   border-radius: 20px;
   background-color: #58586F;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 10px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 }
@@ -78,10 +79,10 @@ section{
   text-align: center;
   box-sizing: border-box;
   border: 2px solid var(--no2);
-  border-radius: 20px;
+  border-radius: 25px;
   background-color: #58586F;
   color: white;
-  padding: 10px 20px;
+  padding: 15px 20px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 }
@@ -102,6 +103,7 @@ section{
 .login-btn{
   font-weight: bold;
   border: none;
+  font-size: 20px;
   background-color: var(--no2);
   color: var(--no4);
   border-radius: 5px;
@@ -121,11 +123,10 @@ section{
   display: none;
   justify-content: center;
   align-items: center;
-  height: 35px;
 }
 .user-image{
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   border: 2px solid var(--no4);
   border-radius: 50%;
   margin-left: 10px;
@@ -144,7 +145,7 @@ section{
   position: absolute;
   background-color: var(--no2);
   border-radius: 5px;
-  min-width: 150px;
+  min-width: 200px;
   right: 0;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -154,7 +155,7 @@ section{
 }
 
 .dropdown-menu-item{
-  padding: 5px;
+  padding: 10px;
   color: var(--no4);
   border-radius: 5px;
 }
@@ -170,7 +171,6 @@ section{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 35px;
 }
 
 /* PROFILE */
@@ -182,7 +182,7 @@ section{
 }
 
 .profile-left{
-  width: 25%;
+  width: 30%;
   background-color: #3f3f56;
   padding: 10px;
   height: 100%;
@@ -194,7 +194,7 @@ section{
   flex-direction: column;
 }
 .profile-right{
-  width: 75%;
+  width: 70%;
   background-color: #3f3f56;
   padding: 10px;
   height: 100%;
@@ -203,8 +203,8 @@ section{
 }
 
 .user-profile-image{
-  max-height: 150px;
-  max-width: 150px;
+  max-height: 200px;
+  max-width: 200px;
   height: 100%;
   width: 100%;
   border: 2px solid var(--no4);
@@ -215,14 +215,14 @@ section{
 
 .profile-name{
   font-weight: bold;
-  font-size: 20px;
+  font-size: 25px;
   margin: 10px 0px;
 }
 .profile-menu{
   width: 100%;
 }
 .menu-item{
-  padding: 5px;
+  padding: 10px;
   color: var(--no4);
   background-color: var(--no1);
   border-radius: 5px;
@@ -241,7 +241,7 @@ section{
 .section-header{
   font-weight: bold;
   padding: 10px;
-  font-size: 20px;
+  font-size: 25px;
   padding: 5px 10px;
   color: var(--no4);
   background-color: var(--no1);
@@ -250,37 +250,68 @@ section{
 
 .films{
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   padding: 10px;
 }
 
+
 .film{
+  width: 200px;
   position: relative;
-  text-align: center;
-  max-width: 150px;
-  max-height: 200px;
+  border-radius: 3px;
+  background-color: var(--no1);
+  box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 1);
+  overflow: hidden;
 }
 .film img{
-  height: 100%;
   width: 100%;
-  border: 2px solid var(--no4);
 }
-.film:hover img{
-  opacity: 0.4;
+
+.film-info{
+  color: var(--no4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+
 }
-.film h2{
-  opacity: 0;
-  text-align: center;
+.film-info h4{
+  margin: 0;
+}
+
+.film-info span{
+  background-color: var(--no2);
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.film-info span.green{
+  color: lightgreen;
+}
+.film-info span.orange{
+  color: orange;
+}
+
+.overview{
   position: absolute;
-  top: 0;
-  padding: 10px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 15px;
+  background-color: #fff;
+  color: black;
+  padding: 5px;
+  max-height: 70%;
+  transform: translateY(101%);
+  transition: transform 0.2s ease-in;
 }
-.film:hover h2{
-  opacity: 1;
+.film:hover .overview{
+  transform: translateY(0)
 }
-
-
 
 /* ALERTS */
 

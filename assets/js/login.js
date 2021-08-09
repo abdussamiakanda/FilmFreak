@@ -34,7 +34,7 @@ function LogoutUser() {
   firebase.auth().signOut().then(()=>{
     document.getElementById('user_head').style.display="none";
     document.getElementById('nonuser_head').style.display="flex";
-    alertMessage(type="success", "You're logged out!")
+    alertMessage(type="danger", "You're logged out!")
   }).catch((e)=>{
     console.log(e)
   })
