@@ -5,7 +5,6 @@ document.getElementById('logout').addEventListener('click', LogoutUser)
 
 function GoogleLogin() {
   firebase.auth().signInWithPopup(provider).then(res=>{
-    console.log(res)
     alertMessage(type="success", "You're logged in!")
     showUserData(res.user)
     document.getElementById('user_head').style.display="flex";

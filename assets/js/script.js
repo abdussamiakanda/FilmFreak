@@ -4,7 +4,7 @@ const API_KEY = "api_key=bef5eb55028208771a057a3a652b8632";
 const BASE_URL = "https://api.themoviedb.org/3"
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const HIGH_URL = "https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&sort_by=vote_average.desc&" + API_KEY;
-const POPULAR_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
+const POPULAR_URL = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&" + API_KEY;
 
 
 const popular = document.getElementById('popular_films');
@@ -16,6 +16,7 @@ getFilms(HIGH_URL,highrated);
 
 function getFilms(url,divId){
   fetch(url).then(res => res.json()).then(data =>{
+    console.log(data.results)
     showFilms(data.results,divId);
   })
 }
