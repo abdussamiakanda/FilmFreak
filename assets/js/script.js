@@ -19,7 +19,7 @@ function getFilms(url,divId){
     console.log(data.results)
     showFilms(data.results,divId);
   })
-} 
+}
 
 function showFilms(data,divId){
   divId.innerHTML = '';
@@ -27,7 +27,7 @@ function showFilms(data,divId){
     const {title, poster_path, vote_average, overview, id} = movie;
     const filmEl = document.createElement('div');
     filmEl.classList.add('film');
-    filmEl.innerHTML = `<a href="/movie.html?id=${id}">
+    filmEl.innerHTML = `<a href="./movie.html?id=${id}">
     <img src="${IMG_URL+poster_path}" alt="${title}">
     <div class="film-info">
       <h4>${title}</h4>
