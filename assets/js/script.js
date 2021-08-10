@@ -16,7 +16,6 @@ getFilms(HIGH_URL,highrated);
 
 function getFilms(url,divId){
   fetch(url).then(res => res.json()).then(data =>{
-    console.log(data.results)
     showFilms(data.results,divId);
   })
 }
