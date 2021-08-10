@@ -19,7 +19,7 @@ function getFilms(url,divId){
     console.log(data.results)
     showFilms(data.results,divId);
   })
-}
+} 
 
 function showFilms(data,divId){
   divId.innerHTML = '';
