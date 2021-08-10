@@ -4,13 +4,14 @@ document.getElementById('login').addEventListener('click', GoogleLogin)
 document.getElementById('logout').addEventListener('click', LogoutUser)
 
 function GoogleLogin() {
-  firebase.auth().signInWithPopup(provider).then(res=>{
+  firebase.auth().signInWithRedirect(provider).getRedirectResult().then(res=>{
     alertMessage(type="success", "You're logged in!")
     showUserData(res.user)
     document.getElementById('user_head').style.display="flex";
     document.getElementById('nonuser_head').style.display="none";
   }).catch((e)=>{})
 }
+
 
 function showUserData(user){
   //document.getElementById('user_name').innerHTML = `Hola, ${user.displayName}`

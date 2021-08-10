@@ -2,11 +2,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>FilmFreak</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/css/master.css">
   </head>
   <body>
@@ -18,9 +18,7 @@
             <a href="./index.html">FilmFreak</a>
           </div>
           <div class="user-head" id="user_head">
-            <form action="./search.html">
-              <input type="text" class="search" name="s" placeholder="Search movies.." autocomplete="off">
-            </form>
+            <a href="./search.html"><i class="search-icon fa fa-search" aria-hidden="true"></i></a>
             <div class="user-name" id="user_name"></div>
             <div class="dropdown">
               <div class="user-image-div" id="user_image_div"></div>
@@ -31,9 +29,7 @@
             </div>
           </div>
           <div class="nonuser-head" id="nonuser_head">
-            <form action="./search.html">
-              <input type="text" class="search" name="s" placeholder="Search movies.." autocomplete="off">
-            </form>
+            <a href="./search.html"><i class="search-icon fa fa-search" aria-hidden="true"></i></a>
             <button id="login" class="login-btn">Login with Google</button>
           </div>
         </div>
@@ -51,29 +47,21 @@
         <div class="profile-image" id="profile_image"></div>
         <div class="profile-name" id="profile_name"></div>
         <div class="profile-menu" id="profile_menu">
-          <a href="./wishlist.html"><div class="menu-item">Wishlist</div></a>
-          <a href="./watched.html"><div class="menu-item">Watched</div></a>
-          <div class="menu-item" id="settings" style="cursor:pointer;">Settings</div>
+          <div class="menu-item" id="dashboard_btn" style="cursor:pointer;">Dashboard</div></a>
+          <div class="menu-item" id="wishlist_btn" style="cursor:pointer;">Wishlist</div></a>
+          <div class="menu-item" id="watched_btn" style="cursor:pointer;">Watched</div></a>
+          <div class="menu-item" id="settings_btn" style="cursor:pointer;">Settings</div>
           <div class="menu-item" id="profilelogout" style="cursor:pointer;">Logout</div>
         </div>
       </div>
       <div class="profile-right">
-        <div class="info">
+        <div class="short-info" id="short_info">
           <div class="short-wishlist">
             <div class="section-header">
               Wishlist
             </div>
             <div class="films">
-              <div class="film">
-                <img src="https://i.pinimg.com/originals/73/23/50/7323502c151d4e6f330f917584757b76.jpg" alt="">
-                <div class="film-info">
-                  <h4>Ironman</h4>
-                  <span class="orange">9.8</span>
-                </div>
-                <div class="overview">
-                  helosooskd
-                </div>
-              </div>
+
             </div>
           </div>
           <div class="short-watched">
@@ -81,28 +69,41 @@
               Watched
             </div>
             <div class="films">
-              <div class="film">
-                <img src="https://i.pinimg.com/originals/73/23/50/7323502c151d4e6f330f917584757b76.jpg" alt="">
-                <div class="film-info">
-                  <h4>Ironman</h4>
-                  <span class="orange">9.8</span>
-                </div>
-                <div class="overview">
-                  helosooskd
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
-        <div class="wishlist" id="wishlist">
 
+        <div class="wishlist" id="wishlist_div">
+          <div class="section-header">
+            Wishlist
+          </div>
+          <div class="content-holder">
+            gfjddfjdfjkh
+          </div>
         </div>
-        <div class="watched" id="watched">
 
+        <div class="watched" id="watched_div">
+          <div class="section-header">
+            Watched Films
+          </div>
+          <div class="content-holder">
+            gfjddfjdfjkh
+          </div>
         </div>
-        <div class="short-wishlist">
+
+        <div class="settings" id="settings_div">
           <div class="section-header">
             Settings
+          </div>
+          <div class="content-holder">
+            <div class="setting-div">
+              Download your data as a .json file <span class="download">Download</span>
+            </div>
+            <div class="setting-div">
+              Delete all your data <span class="delete">Delete</span>
+            </div>
+
           </div>
         </div>
       </div>
@@ -122,6 +123,5 @@
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
     <script src="./assets/js/firebase.js"></script>
     <script src="./assets/js/profile.js"></script>
-    <script src="./assets/js/script.js"></script>
   </body>
 </html>

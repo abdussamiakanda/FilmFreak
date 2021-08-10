@@ -14,6 +14,48 @@ body{
   padding: 0;
 }
 
+a{
+  text-decoration: none;
+}
+
+img { color: orange; text-align: center; }
+
+hr{
+  border: none;
+  border-top: 1px solid white;
+}
+
+.setting-div{
+  padding: 15px 0px;
+}
+
+span.delete{
+  float: right;
+  align-self: center;
+  background-color: red;
+  color: white;
+  padding: 5px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+span.delete:hover{
+  background-color: darkred;
+  color: white;
+}
+
+span.download{
+  float: right;
+  background-color: green;
+  color: white;
+  padding: 5px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+span.download:hover{
+  background-color: darkgreen;
+  color: white;
+}
+
 
 /* HEADER */
 
@@ -46,7 +88,6 @@ section{
   font-weight: bold;
 }
 .logo a{
-  text-decoration: none;
   color: var(--no4);
 }
 .logo a:hover{
@@ -55,31 +96,28 @@ section{
 }
 /* SEARCH */
 
-.search{
-  min-width: 150px;
-  width: 100%;
+.search-icon{
+  height: 100%;
   box-sizing: border-box;
-  border: 2px solid var(--no2);
-  border-radius: 20px;
-  background-color: #58586F;
+  border-radius: 100%;
+  padding: 12px 12px;
+  cursor: pointer;
   color: white;
-  padding: 10px 10px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
 }
 
-.search:hover, .search:focus{
-  outline: none;
-  border: 2px solid var(--no3);
+.search-icon:hover{
+  background-color: rgba(0,0,0,.2)
 }
 
 .big-search{
   min-width: 150px;
   width: 100%;
   text-align: center;
+  font-size: 20px;
   box-sizing: border-box;
   border: 2px solid var(--no2);
-  border-radius: 25px;
+  border-radius: 35px;
+  margin-top: 10px;
   background-color: #58586F;
   color: white;
   padding: 15px 20px;
@@ -191,9 +229,8 @@ section{
   border-radius: 5px;
   margin: 2px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
 }
 .profile-right{
   width: 70%;
@@ -203,6 +240,7 @@ section{
   border-radius: 5px;
   margin: 2px;
 }
+
 
 .user-profile-image{
   max-height: 200px;
@@ -223,6 +261,20 @@ section{
 .profile-menu{
   width: 100%;
 }
+
+.wishlist{
+  display: none;
+}
+.watched{
+  display: none;
+}
+.settings{
+  display: none;
+}
+.content-holder{
+  padding: 10px;
+}
+
 .menu-item{
   padding: 10px;
   color: var(--no4);
@@ -253,17 +305,21 @@ section{
 }
 
 .section-header span{
-  background-color: black;
-  color: white;
-  border-radius: 3px;
+  background-color: var(--no2);
   padding: 5px;
-  font-size: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 13px;
   float: right;
 }
 
-.profile-menu a{
-  text-decoration: none;
+.section-header span.green{
+  color: lightgreen;
 }
+.section-header span.orange{
+  color: orange;
+}
+
 
 /* FILMS */
 
@@ -344,6 +400,26 @@ section{
 
 .movie-image{
   width: 100%;
+}
+
+.movie-mid{
+  width: 45%;
+  background-color: #3f3f56;
+  padding: 10px;
+  height: inherit;
+  border-radius: 5px;
+  margin: 2px;
+}
+.movie-right{
+  width: 25%;
+  background-color: #3f3f56;
+  padding: 10px;
+  height: inherit;
+  border-radius: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 

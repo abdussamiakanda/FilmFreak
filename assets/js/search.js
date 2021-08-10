@@ -17,7 +17,6 @@ const searchDiv = document.getElementById('search_res_container');
 const search = document.getElementById('big_search');
 
 search.addEventListener('input', updateValue);
-search.addEventListener('submit', updateValue);
 
 function updateValue(e) {
   if(e){
@@ -38,10 +37,10 @@ function getFilms(url){
 function showFilms(data){
   searchDiv.innerHTML = '';
   data.forEach(movie => {
-    const {title, poster_path, vote_average, overview} = movie;
+    const {title, poster_path, vote_average, overview, id} = movie;
     const filmEl = document.createElement('div');
     filmEl.classList.add('film');
-    filmEl.innerHTML = `
+    filmEl.innerHTML = `<a href="./movie.html?id=${id}">
     <img src="${IMG_URL+poster_path}" alt="${title}">
     <div class="film-info">
       <h4>${title}</h4>
@@ -50,11 +49,13 @@ function showFilms(data){
     <div class="overview">
       <h4 style="margin: 0;">Overview</h4>
       ${overview}
-    </div>
+    </div></a>
     `
     searchDiv.appendChild(filmEl);
   })
 }
+
+
 
 function getColor(vote){
   if(vote>=7){

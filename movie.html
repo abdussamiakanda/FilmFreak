@@ -2,11 +2,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>FilmFreak</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/css/master.css">
   </head>
   <body>
@@ -18,9 +18,7 @@
             <a href="./index.html">FilmFreak</a>
           </div>
           <div class="user-head" id="user_head">
-            <form action="./search.html">
-              <input type="text" class="search" name="s" placeholder="Search movies.." autocomplete="off">
-            </form>
+            <a href="./search.html"><i class="search-icon fa fa-search" aria-hidden="true"></i></a>
             <div class="user-name" id="user_name"></div>
             <div class="dropdown">
               <div class="user-image-div" id="user_image_div"></div>
@@ -31,9 +29,7 @@
             </div>
           </div>
           <div class="nonuser-head" id="nonuser_head">
-            <form action="./search.html">
-              <input type="text" class="search" name="s" placeholder="Search movies.." autocomplete="off">
-            </form>
+            <a href="./search.html"><i class="search-icon fa fa-search" aria-hidden="true"></i></a>
             <button id="login" class="login-btn">Login with Google</button>
           </div>
         </div>
@@ -49,13 +45,21 @@
     <section class="user-profile">
       <div class="profile-left">
         <div class="profile-image" id="movie_image"></div>
-        <div class="profile-menu" id="movie_menu"></div>
       </div>
-      <div class="profile-right">
+      <div class="movie-mid">
         <div class="info">
           <div class="section-header" id="movie_header"></div>
           <div id="overview" class="movie-overview"></div>
         </div>
+      </div>
+      <div class="movie-right">
+        <div>
+          <i class="fa fa-eye-slash" aria-hidden="true"></i>
+          <i class="fa fa-eye" aria-hidden="true"></i>
+          <i class="fa fa-bookmark" aria-hidden="true"></i>
+          <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+        </div>
+        <div class="profile-menu" id="movie_menu"></div>
       </div>
     </section>
 

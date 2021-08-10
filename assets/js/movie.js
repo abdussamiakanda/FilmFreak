@@ -20,9 +20,9 @@ getFilms(MOVIE_URL);
 
 function getFilms(url){
   fetch(url).then(res => res.json()).then(data =>{
-    console.log(data)
     if(data.success === false){
-      title.innerHTML = `Invalid movie id!`
+      alertMessage(type="success", "Invalid movie id!");
+      setTimeout(() => { window.location.replace("./index.html"); }, 2000);
     }else{
       showFilms(data);
     }
@@ -31,7 +31,7 @@ function getFilms(url){
 
 function showFilms(data){
   image.innerHTML = `<img class="movie-image" src="${IMG_URL+data.poster_path}" alt="${data.title}">`
-  title.innerHTML = `${data.title} - ${data.release_date.substring(0,4)} <span>${data.vote_average}</span>`
+  title.innerHTML = `${data.title} - ${data.release_date.substring(0,4)} <span class="${getColor(data.vote_average)}">${data.vote_average}</span>`
   overview.innerHTML = `<p>${data.tagline}</p><h4>Overview:</h4>${data.overview}`
   movie_menu.innerHTML = `
     <div class="movie-menu-item">Status: ${data.status}</div>
@@ -42,7 +42,7 @@ function showFilms(data){
     <div class="movie-menu-item">Budget: ${data.budget} &#36;</div>
     <div class="movie-menu-item">Revenue: ${data.revenue} &#36;</div>
   `
-
+  document.title = data.title + " - FilmFreak";
 }
 
 function getColor(vote){
