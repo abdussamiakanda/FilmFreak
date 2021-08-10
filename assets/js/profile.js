@@ -9,7 +9,7 @@ document.getElementById('watched_btn').addEventListener('click', WatchedManager)
 document.getElementById('dashboard_btn').addEventListener('click', DashboardManager);
 
 function GoogleLogin() {
-  firebase.auth().signInWithRedirect(provider).then(res=>{
+  firebase.auth().signInWithPopup(provider).then(res=>{
     alertMessage(type="success", "You're logged in!")
     showUserData(res.user)
     document.getElementById('user_head').style.display="flex";
@@ -74,8 +74,11 @@ function DashboardManager(){
   document.getElementById("short_info").style.display="block";
 }
 
-
 checkAuthState()
+
+// FIREBASE
+
+
 
 function alertMessage(type="success", message){
     let x = document.getElementById("alerts")

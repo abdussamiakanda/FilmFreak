@@ -43,6 +43,17 @@ function showFilms(data){
     <div class="movie-menu-item">Revenue: ${data.revenue} &#36;</div>
   `
   document.title = data.title + " - FilmFreak";
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        document.getElementById("user_handler").innerHTML = `
+          <div class="wish"><i class="fa fa-eye" aria-hidden="true">Not Seen</i></div>
+          <div class="wish"><i class="fa fa-bookmark-o" aria-hidden="true"></i></div>
+        `
+    }
+    else {
+      document.getElementById("user_handler").innerHTML = ``
+    }
+  })
 }
 
 function getColor(vote){
@@ -52,6 +63,13 @@ function getColor(vote){
     return 'orange'
   }
 }
+
+// FIREBASE
+
+
+
+
+
 
 function alertMessage(type="success", message){
     let x = document.getElementById("alerts")

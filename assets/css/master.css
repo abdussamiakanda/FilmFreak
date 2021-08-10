@@ -25,38 +25,6 @@ hr{
   border-top: 1px solid white;
 }
 
-.setting-div{
-  padding: 15px 0px;
-}
-
-span.delete{
-  float: right;
-  align-self: center;
-  background-color: red;
-  color: white;
-  padding: 5px 7px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-span.delete:hover{
-  background-color: darkred;
-  color: white;
-}
-
-span.download{
-  float: right;
-  background-color: green;
-  color: white;
-  padding: 5px 7px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-span.download:hover{
-  background-color: darkgreen;
-  color: white;
-}
-
-
 /* HEADER */
 
 section{
@@ -213,6 +181,56 @@ section{
   margin-right: 10px;
 }
 
+
+.setting-div{
+  padding: 15px 0px;
+}
+
+span.delete{
+  float: right;
+  align-self: center;
+  background-color: red;
+  color: white;
+  padding: 5px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+span.delete:hover{
+  background-color: darkred;
+  color: white;
+}
+
+span.download{
+  float: right;
+  background-color: green;
+  color: white;
+  padding: 5px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+span.download:hover{
+  background-color: darkgreen;
+  color: white;
+}
+
+.user-handler{
+  display: flex;
+  justify-content: space-around;
+}
+.wish{
+  padding: 10px;
+  color: var(--no4);
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 5px;
+  border: 1px solid #3f3f56;
+  cursor: pointer;
+  margin: 0px 10px 10px 10px;
+}
+.wish:hover{
+  background-color: rgba(0,0,0,0.7);
+}
+
+
 /* PROFILE */
 
 .user-profile{
@@ -240,7 +258,6 @@ section{
   border-radius: 5px;
   margin: 2px;
 }
-
 
 .user-profile-image{
   max-height: 200px;
