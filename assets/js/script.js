@@ -24,10 +24,10 @@ function getFilms(url,divId){
 function showFilms(data,divId){
   divId.innerHTML = '';
   data.forEach(movie => {
-    const {title, poster_path, vote_average, overview} = movie;
+    const {title, poster_path, vote_average, overview, id} = movie;
     const filmEl = document.createElement('div');
     filmEl.classList.add('film');
-    filmEl.innerHTML = `
+    filmEl.innerHTML = `<a href="/movie.html?id=${id}">
     <img src="${IMG_URL+poster_path}" alt="${title}">
     <div class="film-info">
       <h4>${title}</h4>
@@ -36,7 +36,7 @@ function showFilms(data,divId){
     <div class="overview">
       <h4 style="margin: 0;">Overview</h4>
       ${overview}
-    </div>
+    </div></a>
     `
     divId.appendChild(filmEl);
   })

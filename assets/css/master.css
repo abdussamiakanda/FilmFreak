@@ -234,6 +234,33 @@ section{
   background-color: var(--no4);
   color: var(--no1);
 }
+
+.movie-menu-item{
+  padding: 10px;
+  color: var(--no4);
+  background-color: var(--no1);
+  border-radius: 5px;
+  border: 1px solid #3f3f56;
+}
+
+.movie-overview{
+  border: none;
+  padding: 0px 15px 15px 15px;
+  text-align: justify;
+}
+.movie-overview h4{
+  margin-bottom: 10px;
+}
+
+.section-header span{
+  background-color: black;
+  color: white;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 15px;
+  float: right;
+}
+
 .profile-menu a{
   text-decoration: none;
 }
@@ -314,6 +341,11 @@ section{
 .film:hover .overview{
   transform: translateY(0)
 }
+
+.movie-image{
+  width: 100%;
+}
+
 
 /* ALERTS */
 
