@@ -218,6 +218,8 @@ span.download:hover{
   justify-content: space-around;
 }
 .wish{
+  position: relative;
+  display: inline-block;
   padding: 10px;
   color: var(--no4);
   background-color: rgba(0,0,0,0.3);
@@ -229,6 +231,53 @@ span.download:hover{
 .wish:hover{
   background-color: rgba(0,0,0,0.7);
 }
+.wish-active{
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  color: green;
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 5px;
+  border: 1px solid #3f3f56;
+  cursor: pointer;
+  margin: 0px 10px 10px 10px;
+}
+.wish-active:hover{
+  background-color: rgba(0,0,0,0.7);
+}
+
+.wish .tooltiptext, .wish-active .tooltiptext{
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.wish .tooltiptext::after, .wish-active .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.wish:hover .tooltiptext, .wish-active:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 
 /* PROFILE */
