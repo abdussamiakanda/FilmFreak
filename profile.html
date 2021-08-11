@@ -24,6 +24,7 @@
               <div class="user-image-div" id="user_image_div"></div>
               <div class="dropdown-menu">
                 <a href="./profile.html"><div class="dropdown-menu-item">Profile</div></a>
+                <a href="./friends.html" id="friends"></a>
                 <div class="dropdown-menu-item" id="logout" style="cursor:pointer;">Logout</div>
               </div>
             </div>
@@ -78,7 +79,7 @@
           <div class="section-header">
             Wishlist
           </div>
-          <div class="content-holder">
+          <div class="films" id="wish-container">
             gfjddfjdfjkh
           </div>
         </div>
@@ -87,7 +88,7 @@
           <div class="section-header">
             Watched Films
           </div>
-          <div class="content-holder">
+          <div class="films" id="watched-container">
             gfjddfjdfjkh
           </div>
         </div>
@@ -97,17 +98,45 @@
             Settings
           </div>
           <div class="content-holder">
-            <div class="setting-div">
-              Download your data as a .json file <span class="download">Download</span>
+            <div class="setting-head">
+              Profile settings
             </div>
             <div class="setting-div">
-              Delete all your data <span class="delete">Delete</span>
+              Make your profile public
+              <label class="switch">
+                <input type="checkbox" id="toggle">
+                <span class="slider round"></span>
+              </label>
+              <p class="settings-detail">Making your profile public allows your friends to find you and allows you to find your friends on FilmFreak.</p>
+            </div>
+              <div class="setting-head">
+                Profile data
+              </div>
+            <div class="setting-div">
+              Download your data as a .json file <span class="download" id="download_data">Download</span>
+            </div>
+            <div class="setting-div">
+              Delete all your data <span class="delete" id="delete_data">Delete</span>
             </div>
 
           </div>
         </div>
       </div>
     </section>
+
+
+    <section>
+      <div class="delete-pop-up" id="myModal">
+        <div class="modal-content">
+          Are you sure you want to delete all your film data?
+          <div>
+            <button type="button" class="yes-button" id="yes_button">YES</button>
+            <button type="button" class="no-button" id="no_button">NO</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
 
 

@@ -5,13 +5,15 @@ const BASE_URL = "https://api.themoviedb.org/3"
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const HIGH_URL = "https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&sort_by=vote_average.desc&" + API_KEY;
 const POPULAR_URL = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&" + API_KEY;
-
+const UPCOMING_URL = "https://api.themoviedb.org/3/movie/upcoming?" + API_KEY + "&language=en-US&page=1";
 
 const popular = document.getElementById('popular_films');
 const highrated = document.getElementById('high_rated_films');
+const upcoming = document.getElementById('upcoming_films');
 
 
 getFilms(POPULAR_URL,popular);
+getFilms(UPCOMING_URL,upcoming);
 getFilms(HIGH_URL,highrated);
 
 function getFilms(url,divId){

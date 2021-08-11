@@ -9,7 +9,7 @@ const API_KEY = "api_key=bef5eb55028208771a057a3a652b8632";
 const BASE_URL = "https://api.themoviedb.org/3"
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const MOVIE_URL = "https://api.themoviedb.org/3/movie/"+ searchQuery + "?" + API_KEY + "&language=en-US";
-const SUGGEST_URL = "https://api.themoviedb.org/3/movie/"+ searchQuery + "/recommendations?" + API_KEY + "&language=en-US&page=1";
+const SIMILAR_URL = "https://api.themoviedb.org/3/movie/"+ searchQuery + "/similar?" + API_KEY + "&language=en-US&page=1";
 
 const image = document.getElementById('movie_image');
 const title = document.getElementById('movie_header');
@@ -19,7 +19,7 @@ const suggested_menu = document.getElementById('suggested_films');
 
 
 getFilms(MOVIE_URL);
-getSuggestFilms(SUGGEST_URL,suggested_menu);
+getSuggestFilms(SIMILAR_URL,suggested_menu);
 
 function getFilms(url){
   fetch(url).then(res => res.json()).then(data =>{
@@ -72,7 +72,7 @@ function getColor(vote){
 var user_handler_div_area = document.getElementById("user_handler")
 
 function showUserWishHandler(user){
-  database.ref('/'+user.uid+'/'+searchQuery).once("value").then((snapshot) => {
+  database.ref('/'+user.uid+'/movies/'+searchQuery).once("value").then((snapshot) => {
     var wish = snapshot.child("wish").val();
     var watched = snapshot.child("watched").val();
 
@@ -108,16 +108,16 @@ function events(){
 }
 
 function WriteWish(){
-  database.ref('/'+userdata.uid+'/'+searchQuery).once("value").then((snapshot) => {
+  database.ref('/'+userdata.uid+'/movies/'+searchQuery).once("value").then((snapshot) => {
     var wish = snapshot.child("wish").val();
 
     if (wish === true){
-      database.ref('/'+userdata.uid+'/'+searchQuery).update({
+      database.ref('/'+userdata.uid+'/movies/'+searchQuery).update({
         wish: false,
       })
       showUserWishHandler(userdata);
     }else {
-      database.ref('/'+userdata.uid+'/'+searchQuery).update({
+      database.ref('/'+userdata.uid+'/movies/'+searchQuery).update({
         wish: true,
       })
       showUserWishHandler(userdata);
@@ -126,28 +126,28 @@ function WriteWish(){
 }
 
 function WriteWatched(){
-  database.ref('/'+userdata.uid+'/'+searchQuery).once("value").then((snapshot) => {
+  database.ref('/'+userdata.uid+'/movies/'+searchQuery).once("value").then((snapshot) => {
     var wish = snapshot.child("wish").val();
     var watched = snapshot.child("watched").val();
 
     if (wish === true && watched !== true){
-      database.ref('/'+userdata.uid+'/'+searchQuery).update({
+      database.ref('/'+userdata.uid+'/movies/'+searchQuery).update({
         wish: false,
         watched: true
       })
       showUserWishHandler(userdata);
     }else if (wish !== true && watched !== true){
-      database.ref('/'+userdata.uid+'/'+searchQuery).update({
+      database.ref('/'+userdata.uid+'/movies/'+searchQuery).update({
         watched: true
       })
       showUserWishHandler(userdata);
     }else if (wish === true && watched === true){
-      database.ref('/'+userdata.uid+'/'+searchQuery).update({
+      database.ref('/'+userdata.uid+'/movies/'+searchQuery).update({
         watched: false
       })
       showUserWishHandler(userdata);
     }else if (wish !== true && watched === true){
-      database.ref('/'+userdata.uid+'/'+searchQuery).update({
+      database.ref('/'+userdata.uid+'/movies/'+searchQuery).update({
         watched: false,
       })
       showUserWishHandler(userdata);

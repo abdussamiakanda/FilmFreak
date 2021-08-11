@@ -1,4 +1,5 @@
 var provider = new firebase.auth.GoogleAuthProvider();
+var database = firebase.database();
 
 document.getElementById('login').addEventListener('click', GoogleLogin)
 document.getElementById('logout').addEventListener('click', LogoutUser)
@@ -13,6 +14,7 @@ function GoogleLogin() {
 }
 
 function showUserData(user){
+  FriendsHandler(user);
   //document.getElementById('user_name').innerHTML = `Hola, ${user.displayName}`
   document.getElementById('user_image_div').innerHTML = `<img src="${user.photoURL}" class="user-image">`
 }
@@ -25,6 +27,18 @@ function checkAuthState(){
       showUserData(user);
     }else{
 
+    }
+  })
+}
+
+function FriendsHandler(userdata){
+  database.ref('/'+userdata.uid+'/profile').once("value").then((snapshot) => {
+    var public = snapshot.child("public").val();
+    if(public === true){
+      document.getElementById("friends").innerHTML = `
+        <div class="dropdown-menu-item">Friends</div>
+      `
+    }else{
     }
   })
 }
