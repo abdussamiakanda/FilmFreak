@@ -307,6 +307,7 @@ span.download:hover{
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
 }
+
 .modal-content {
   background-color: var(--no4);
   color: #000;
