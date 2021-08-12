@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <title>Friends - FilmFreak</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -39,33 +40,38 @@
       </div>
     </section>
 
+
     <section style="margin-top:20px;">
       <div class="alerts" id="alerts"></div>
     </section>
 
 
     <section class="user-profile">
-      <div class="profile-left">
-        <div class="profile-image" id="movie_image"></div>
-      </div>
-      <div class="movie-mid">
-        <div class="info">
-          <div class="section-header" id="movie_header"></div>
-          <div id="overview" class="movie-overview"></div>
+      <div class="friends-container">
+        <div class="friends-header">
+          <div href="#" class="friends-menu-item selected-friends-item" id="all_friends">
+            <span>All Friends</span>
+          </div>
+          <div href="#" class="friends-menu-item" id="req_friends">
+            <span>Friend Requests</span>
+          </div>
+          <div href="#" class="friends-menu-item" id="find_friends">
+            <span>Find Friends</span>
+          </div>
         </div>
-      </div>
-      <div class="movie-right">
-        <div id="user_handler" class="user-handler"></div>
-        <div class="profile-menu" id="movie_menu"></div>
-      </div>
-    </section>
+
+        <div class="friends-div" id="all_friends_div"></div>
+        <div class="friends-div hide" id="req_friends_div"></div>
+        <div class="hide" id="find_friends_div">
+          <div class="search-frnd">
+            <form id="form">
+              <input type="text" id="frnd_search" class="frnd-search-input" placeholder="Search friends.." autocomplete="off">
+            </form>
+          </div>
+          <div class="friends-div" id="search_results"></div>
+        </div>
 
 
-    <section>
-      <div class="section-header">
-        Suggested Films
-      </div>
-      <div class="films" id="suggested_films">
       </div>
     </section>
 
@@ -78,7 +84,6 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
     <script src="./assets/js/firebase.js"></script>
-    <script src="./assets/js/login.js"></script>
-    <script src="./assets/js/movie.js"></script>
+    <script src="./assets/js/friends.js"></script>
   </body>
 </html>

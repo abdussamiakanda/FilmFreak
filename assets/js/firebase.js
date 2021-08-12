@@ -12,3 +12,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+
+document.getElementById("message-icon").onclick = function (){
+  alertMessage(type="danger", "Message feature is not available yet!");
+}

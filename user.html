@@ -39,6 +39,7 @@
       </div>
     </section>
 
+
     <section style="margin-top:20px;">
       <div class="alerts" id="alerts"></div>
     </section>
@@ -46,28 +47,21 @@
 
     <section class="user-profile">
       <div class="profile-left">
-        <div class="profile-image" id="movie_image"></div>
-      </div>
-      <div class="movie-mid">
-        <div class="info">
-          <div class="section-header" id="movie_header"></div>
-          <div id="overview" class="movie-overview"></div>
+        <div class="profile-image" id="profile_image"></div>
+        <div class="profile-name" id="profile_name"></div>
+        <div class="profile-menu" id="profile_menu">
+          <div class="menu-item" id="add_btn" style="cursor:pointer;"></div>
+          <div class="menu-item" id="msg_btn" style="cursor:pointer;">Send Message</div>
         </div>
       </div>
-      <div class="movie-right">
-        <div id="user_handler" class="user-handler"></div>
-        <div class="profile-menu" id="movie_menu"></div>
+      <div class="profile-right">
+        <div id="watched_div">
+          <div class="section-header" id="profile_head"></div>
+          <div class="films" id="watched-container"></div>
+        </div>
       </div>
     </section>
 
-
-    <section>
-      <div class="section-header">
-        Suggested Films
-      </div>
-      <div class="films" id="suggested_films">
-      </div>
-    </section>
 
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -78,7 +72,6 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
     <script src="./assets/js/firebase.js"></script>
-    <script src="./assets/js/login.js"></script>
-    <script src="./assets/js/movie.js"></script>
+    <script src="./assets/js/user.js"></script>
   </body>
 </html>

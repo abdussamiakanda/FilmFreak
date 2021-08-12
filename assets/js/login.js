@@ -25,6 +25,7 @@ function checkAuthState(){
       document.getElementById('user_head').style.display="flex";
       document.getElementById('nonuser_head').style.display="none";
       showUserData(user);
+      showReqFriendsNum(user);
     }else{
 
     }
@@ -59,3 +60,29 @@ function LogoutUser() {
   })
 }
 checkAuthState()
+
+
+function showReqFriendsNum(user){
+  database.ref('/'+user.uid+'/friends').orderByKey().once("value").then((snapshot) => {
+    var num = 0;
+    snapshot.forEach(function(childSnapshot){
+      var profileId = childSnapshot.key;
+      database.ref('/'+user.uid+'/friends/'+profileId).once("value").then((snapshot) => {
+        var status = snapshot.child('status').val();
+        if (status === false){
+          num++;
+          showNumber(num);
+        }else{
+          num = num;
+        }
+      });
+    });
+  });
+}
+
+function showNumber(num){
+  document.getElementById('friends-icon').style.position = 'relative';
+  document.getElementById('friends-icon').innerHTML += `
+    <i class="badge-dot fa fa-circle" aria-hidden="true"></i>
+  `
+}

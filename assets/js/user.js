@@ -1,20 +1,17 @@
-var provider = new firebase.auth.GoogleAuthProvider();
-var database = firebase.database();
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const profileId = urlParams.get('id');
 
-var userdata = null;
+var database = firebase.database();
+var provider = new firebase.auth.GoogleAuthProvider();
+
+var mydata = null;
 
 const API_KEY = "api_key=bef5eb55028208771a057a3a652b8632";
-const BASE_URL = "https://api.themoviedb.org/3"
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
-
-
 
 document.getElementById('login').addEventListener('click', GoogleLogin);
 document.getElementById('logout').addEventListener('click', LogoutUser);
-document.getElementById('profilelogout').addEventListener('click', LogoutUser);
-document.getElementById('settings_btn').addEventListener('click', SettingsManager);
-document.getElementById('wishlist_btn').addEventListener('click', WishlistManager);
-document.getElementById('watched_btn').addEventListener('click', WatchedManager);
 
 function GoogleLogin() {
   firebase.auth().signInWithPopup(provider).then(res=>{
@@ -26,26 +23,25 @@ function GoogleLogin() {
 }
 
 function showUserData(user){
-  document.getElementById('profile_name').innerHTML = `${user.displayName}`
   document.getElementById('user_image_div').innerHTML = `<img src="${user.photoURL}" class="user-image">`
-  document.getElementById('profile_image').innerHTML = `<img src="${user.photoURL}" class="user-profile-image">`
-
 }
+
 
 function checkAuthState(){
   firebase.auth().onAuthStateChanged(user=>{
+    if(user.uid === profileId){
+      window.location.replace("./profile.html");
+    }
     if(user){
-      userdata = user;
+      mydata = user;
       document.getElementById('user_head').style.display="flex";
       document.getElementById('nonuser_head').style.display="none";
       showUserData(user);
+      showProfileData(user);
       PublicProfileHandler(user);
-      wishMoviesHandler(user);
-      watchedMoviesHandler(user);
       showReqFriendsNum(user);
-      document.title = user.displayName + " - FilmFreak";
     }else{
-    alertMessage(type="danger", "You're logged out!")
+    alertMessage(type="danger", "You're logged out!");
     setTimeout(() => { window.location.replace("./index.html"); }, 2000);
     }
   })
@@ -55,61 +51,21 @@ function LogoutUser() {
   firebase.auth().signOut().then(()=>{
     document.getElementById('user_head').style.display="none";
     document.getElementById('nonuser_head').style.display="flex";
+    alertMessage(type="danger", "You're logged out!");
     setTimeout(() => { window.location.replace("./index.html"); }, 2000);
   }).catch((e)=>{
     console.log(e)
   })
 }
 
-function SettingsManager(){
-  document.getElementById("settings_div").style.display="block";
-  document.getElementById("wishlist_div").style.display="none";
-  document.getElementById("watched_div").style.display="none";
-}
-
-function WishlistManager(){
-  document.getElementById("settings_div").style.display="none";
-  document.getElementById("wishlist_div").style.display="block";
-  document.getElementById("watched_div").style.display="none";
-}
-function WatchedManager(){
-  document.getElementById("settings_div").style.display="none";
-  document.getElementById("wishlist_div").style.display="none";
-  document.getElementById("watched_div").style.display="block";
-}
-
 checkAuthState();
 
 // FIREBASE
 
-document.getElementById("toggle").addEventListener('click', PublicProfileManager);
-
-function PublicProfileManager(){
-  database.ref('/'+userdata.uid+'/profile').once("value").then((snapshot) => {
-    var public = snapshot.child("public").val();
-
-    if (public === true){
-      database.ref('/'+userdata.uid+'/profile').update({
-        public: false,
-      })
-      PublicProfileHandler(userdata);
-    }else {
-      database.ref('/'+userdata.uid+'/profile').update({
-        public: true,
-        name: userdata.displayName,
-        email: userdata.email,
-        image: userdata.photoURL
-      })
-      PublicProfileHandler(userdata);
-    }
-  })
-}
-
-function PublicProfileHandler(userdata){
-  database.ref('/'+userdata.uid+'/profile').once("value").then((snapshot) => {
+function PublicProfileHandler(mydata){
+  database.ref('/'+mydata.uid+'/profile').once("value").then((snapshot) => {
     var public = snapshot.child("public").val();
     if(public === true){
-      document.getElementById("toggle").checked = "checked";
       document.getElementById("friends").innerHTML = `
         <div class="dropdown-menu-item">Friends</div>
       `
@@ -120,53 +76,104 @@ function PublicProfileHandler(userdata){
         <i class="search-icon fa fa-comments-o" aria-hidden="true"></i>
       `
     }else{
-      document.getElementById("toggle").checked = false;
     }
   })
 }
 
-var modal = document.getElementById("myModal");
+function showProfileData(user){
+  var name = null;
+  database.ref('/'+profileId+'/profile').once("value").then((snapshot) => {
+    var image = snapshot.child("image").val();
+    name = snapshot.child("name").val();
+    document.title = name + " - FilmFreak";
+    document.getElementById('profile_name').innerHTML = `${name}`
+    document.getElementById('profile_image').innerHTML = `<img src="${image}" class="user-profile-image">`
+  })
 
-document.getElementById("download_data").onclick = function (){
-  alertMessage(type="success", "This feature is not available yet!");
-}
-document.getElementById("delete_data").onclick = function (){
-  modal.style.display = "block";
-}
-document.getElementById("no_button").onclick = function (){
-  modal.style.display = "none";
-}
+  database.ref('/'+user.uid+'/friends/' + profileId).once("value").then((snapshot) => {
+    var mystatus = snapshot.child("status").val();
+    database.ref('/'+profileId+'/friends/' + user.uid).once("value").then((snapshot) => {
+      var prof_status = snapshot.child("status").val();
+      var friend_btn = document.getElementById('add_btn');
+      var prof_head = document.getElementById('profile_head')
 
-document.getElementById("yes_button").onclick = function (){
-  modal.style.display = "none";
-  database.ref('/'+userdata.uid+'/movies').remove();
-  alertMessage(type="danger", "All all your film data are deleted permanently!");
-}
-
-
-function wishMoviesHandler(user){
-  database.ref('/'+user.uid+'/movies').orderByKey().once("value").then((snapshot) => {
-    snapshot.forEach(function(childSnapshot){
-      var MOVIE_URL = "https://api.themoviedb.org/3/movie/"+ childSnapshot.key + "?" + API_KEY + "&language=en-US";
-
-      database.ref('/'+user.uid+'/movies/'+childSnapshot.key).once("value").then((snapshot) => {
-        var wish = snapshot.child("wish").val();
-        var wish_div = document.getElementById("wish-container")
-
-        if(wish === true){
-          getFilms(MOVIE_URL,wish_div);
-        }
-      })
+      if(mystatus === true && prof_status === true){
+        friend_btn.innerHTML = `<div class="added">Remove Friend</div>`
+        prof_head.innerHTML = `Films watched by ${name}.`
+        watchedMoviesHandler(profileId);
+      }else if(mystatus !== true && prof_status === true){
+        friend_btn.innerHTML = `<div class="added">Accept Request</div>`
+        prof_head.innerHTML = `Add as friend to see films watched by ${name}.`
+      }else if(mystatus === true && prof_status !== true){
+        friend_btn.innerHTML = `<div class="added">Cancel Request</div>`
+        prof_head.innerHTML = `Add as friend to see films watched by ${name}.`
+      }else{
+        friend_btn.innerHTML = `<div class="added">Add Friend</div>`
+        prof_head.innerHTML = `Add as friend to see films watched by ${name}.`
+      }
     })
   })
 }
 
+document.getElementById("add_btn").onclick = function (){
+  database.ref('/'+mydata.uid+'/friends/' + profileId).once("value").then((snapshot) => {
+    var mystatus = snapshot.child("status").val();
+    database.ref('/'+profileId+'/friends/' + mydata.uid).once("value").then((snapshot) => {
+      var prof_status = snapshot.child("status").val();
+      var friend_btn = document.getElementById('add_btn');
+      var prof_head = document.getElementById('profile_head')
+
+      if(mystatus === true && prof_status === true){
+        removeFriend(mydata,profileId);
+      }else if(mystatus !== true && prof_status === true){
+        acceptFriend(mydata,profileId);
+      }else if(mystatus === true && prof_status !== true){
+        cancelFriend(mydata,profileId);
+      }else{
+        addFriend(mydata,profileId);
+      }
+    })
+  })
+}
+
+function addFriend(user,profileId){
+  database.ref('/'+user.uid+'/friends/'+profileId).update({
+    status: true
+  })
+  database.ref('/'+profileId+'/friends/'+user.uid).update({
+    status: false
+  })
+  showProfileData(user);
+}
+function cancelFriend(user,profileId){
+  database.ref('/'+user.uid+'/friends/'+profileId).update({
+    status: false
+  })
+  showProfileData(user);
+}
+function acceptFriend(user,profileId){
+  database.ref('/'+user.uid+'/friends/'+profileId).update({
+    status: true
+  })
+  showProfileData(user);
+}
+function removeFriend(user,profileId){
+  database.ref('/'+user.uid+'/friends/'+profileId).update({
+    status: false
+  })
+  database.ref('/'+profileId+'/friends/'+user.uid).update({
+    status: false
+  })
+  document.getElementById("watched-container").innerHTML='';
+  showProfileData(user);
+}
+
 function watchedMoviesHandler(user){
-  database.ref('/'+user.uid+'/movies').orderByKey().once("value").then((snapshot) => {
+  database.ref('/'+user+'/movies').orderByKey().once("value").then((snapshot) => {
     snapshot.forEach(function(childSnapshot){
       var MOVIE_URL = "https://api.themoviedb.org/3/movie/"+ childSnapshot.key + "?" + API_KEY + "&language=en-US";
 
-      database.ref('/'+user.uid+'/movies/'+childSnapshot.key).once("value").then((snapshot) => {
+      database.ref('/'+user+'/movies/'+childSnapshot.key).once("value").then((snapshot) => {
         var watched = snapshot.child("watched").val();
         var watch_div = document.getElementById("watched-container")
 
@@ -177,7 +184,6 @@ function watchedMoviesHandler(user){
     })
   })
 }
-
 
 function getFilms(url,divId){
   fetch(url).then(res => res.json()).then(data =>{
