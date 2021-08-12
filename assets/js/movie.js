@@ -24,7 +24,7 @@ getSuggestFilms(SIMILAR_URL,suggested_menu);
 function getFilms(url){
   fetch(url).then(res => res.json()).then(data =>{
     if(data.success === false){
-      alertMessage(type="success", "Invalid movie id!");
+      alertMessage(type="danger", "Invalid movie id!");
       setTimeout(() => { window.location.replace("./index.html"); }, 2000);
     }else{
       showFilms(data);

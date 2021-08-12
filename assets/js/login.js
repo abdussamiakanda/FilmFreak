@@ -38,6 +38,12 @@ function FriendsHandler(userdata){
       document.getElementById("friends").innerHTML = `
         <div class="dropdown-menu-item">Friends</div>
       `
+      document.getElementById("friends-icon").innerHTML = `
+        <i class="search-icon fa fa-users" aria-hidden="true"></i>
+      `
+      document.getElementById("message-icon").innerHTML = `
+        <i class="search-icon fa fa-comments-o" aria-hidden="true"></i>
+      `
     }else{
     }
   })

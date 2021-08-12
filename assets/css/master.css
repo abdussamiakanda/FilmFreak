@@ -71,6 +71,7 @@ section{
   padding: 12px 12px;
   cursor: pointer;
   color: white;
+  font-size: 25px;
 }
 
 .search-icon:hover{
@@ -410,7 +411,7 @@ span.download:hover{
 }
 
 .wishlist{
-  display: none;
+  display: block;
 }
 .watched{
   display: none;
@@ -450,6 +451,18 @@ span.download:hover{
 }
 .movie-overview h4{
   margin-bottom: 10px;
+}
+
+.user-film{
+  width: 150px;
+  position: relative;
+  border-radius: 2px;
+  background-color: var(--no1);
+  box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 1);
+  overflow: hidden;
+}
+.user-film img{
+  width: 100%;
 }
 
 .section-header span{
