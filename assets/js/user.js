@@ -36,6 +36,7 @@ function checkAuthState(){
       mydata = user;
       document.getElementById('user_head').style.display="flex";
       document.getElementById('nonuser_head').style.display="none";
+      checkPermission(user);
       showUserData(user);
       showProfileData(user);
       PublicProfileHandler(user);
@@ -61,6 +62,25 @@ function LogoutUser() {
 checkAuthState();
 
 // FIREBASE
+
+function checkPermission(user){
+  database.ref('/'+user.uid+'/profile').once("value").then((snapshot) => {
+    var public = snapshot.child("public").val();
+    if(public === false){
+      alertMessage(type="danger", "You're not authorized to see this profile!");
+      setTimeout(() => { window.location.replace("./profile.html"); }, 2000);
+    }else{
+      database.ref('/'+profileId+'/profile').once("value").then((snapshot) => {
+        var pub = snapshot.child("public").val();
+        if(pub === false){
+          alertMessage(type="danger", "This user does not have a public profile!");
+          setTimeout(() => { window.location.replace("./profile.html"); }, 2000);
+        }
+      })
+    }
+
+  })
+}
 
 function PublicProfileHandler(mydata){
   database.ref('/'+mydata.uid+'/profile').once("value").then((snapshot) => {

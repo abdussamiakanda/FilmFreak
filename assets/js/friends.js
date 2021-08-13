@@ -27,6 +27,7 @@ function checkAuthState(){
       userdata = user;
       document.getElementById('user_head').style.display="flex";
       document.getElementById('nonuser_head').style.display="none";
+      checkPermission(user);
       showUserData(user);
       showAllFriendsData(user);
       showReqFriendsData(user);
@@ -98,6 +99,18 @@ document.getElementById("find_friends").onclick = function (){
 
 // FIREBASE
 
+function checkPermission(user){
+  database.ref('/'+user.uid+'/profile').once("value").then((snapshot) => {
+    var public = snapshot.child("public").val();
+    if(public === false){
+      alertMessage(type="danger", "You're not authorized to see this page!");
+      setTimeout(() => { window.location.replace("./profile.html"); }, 2000);
+    }else{
+    }
+  })
+}
+
+
 const search = document.getElementById('frnd_search');
 
 document.getElementById('frnd_search').addEventListener('change', updateValue);
@@ -158,21 +171,26 @@ function showAllFriendsData(user){
       var profileId = childSnapshot.key;
       database.ref('/'+profileId+'/friends/'+user.uid).once("value").then((snapshot) => {
         var status = snapshot.child('status').val();
-        database.ref('/'+user.uid+'/friends/'+profileId).once("value").then((snapshot) => {
-          var mystatus = snapshot.child('status').val();
-          if (mystatus === true && status === true){
-            database.ref('/'+profileId+'/profile').once("value").then((snapshot) => {
-              var image = snapshot.child("image").val();
-              var name = snapshot.child("name").val();
+        database.ref('/'+profileId+'/profile').once("value").then((snapshot) => {
+          var public = snapshot.child('public').val();
+          if (public === true){
+            database.ref('/'+user.uid+'/friends/'+profileId).once("value").then((snapshot) => {
+              var mystatus = snapshot.child('status').val();
+              if (mystatus === true && status === true){
+                database.ref('/'+profileId+'/profile').once("value").then((snapshot) => {
+                  var image = snapshot.child("image").val();
+                  var name = snapshot.child("name").val();
 
-              const userEl = document.createElement('div');
-              userEl.classList.add('user-profile-id');
-              userEl.innerHTML = `
-              <img class="avatar" src="${image}" alt="">
-              <h5>${name}</h5>
-              <a href="./user.html?id=${profileId}"><div class="user-id-button">Profile</div></a>
-              `
-              document.getElementById('all_friends_div').appendChild(userEl);
+                  const userEl = document.createElement('div');
+                  userEl.classList.add('user-profile-id');
+                  userEl.innerHTML = `
+                  <img class="avatar" src="${image}" alt="">
+                  <h5>${name}</h5>
+                  <a href="./user.html?id=${profileId}"><div class="user-id-button">Profile</div></a>
+                  `
+                  document.getElementById('all_friends_div').appendChild(userEl);
+                })
+              }
             })
           }
         })

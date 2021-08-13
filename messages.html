@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/css/master.css">
   </head>
-  <body>
+  <body style="overflow:hidden;">
 
     <section>
       <div class="fixed-header">
@@ -45,20 +45,81 @@
     </section>
 
 
-    <section class="user-profile">
-      <div class="profile-left">
-        <div class="profile-image" id="profile_image"></div>
-        <div class="profile-name" id="profile_name"></div>
-        <div class="profile-menu" id="profile_menu">
-          <div class="menu-item" id="add_btn" style="cursor:pointer;"></div>
-          <div class="menu-item" id="msg_btn" style="cursor:pointer;">Send Message</div>
+    <section class="message-section">
+      <div class="message-left">
+        <div class="section-header">Messages</div>
+        <div class="chats">
+
         </div>
       </div>
-      <div class="profile-right">
-        <div id="watched_div">
-          <div class="section-header" id="profile_head"></div>
-          <div class="films" id="watched-container"></div>
+      <div class="message-right">
+        <div class="section-header">Your Friend</div>
+        <div class="message-contents">
+          <div class="you">
+            <div class="your-chat-content">
+              Kire? Ki koros?<span>10:13 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="friend">
+            <div class="chat-content">
+              Digbaji khai. Khabi tui?<span>10:14 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="you">
+            <div class="your-chat-content">
+              Kire? Ki koros?<span>10:13 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="friend">
+            <div class="chat-content">
+              Digbaji khai. Khabi tui?<span>10:14 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="you">
+            <div class="your-chat-content">
+              Kire? Ki koros?<span>10:13 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="friend">
+            <div class="chat-content">
+              Digbaji khai. Khabi tui?<span>10:14 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="you">
+            <div class="your-chat-content">
+              Kire? Ki koros?<span>10:13 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="friend">
+            <div class="chat-content">
+              Digbaji khai. Khabi tui?<span>10:14 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="you">
+            <div class="your-chat-content">
+              Kire? Ki koros?<span>10:13 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="friend">
+            <div class="chat-content">
+              Digbaji khai. Khabi tui?<span>10:14 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="you">
+            <div class="your-chat-content">
+              Kire? Ki koros?<span>10:13 pm, 13 August 2021</span>
+            </div>
+          </div>
+          <div class="friend">
+            <div class="chat-content">
+              Digbaji khai. Khabi tui?<span>10:14 pm, 13 August 2021</span>
+            </div>
+          </div>
+          
         </div>
+        <form class="">
+          <input type="text" class="chat-input" value="" placeholder="Enter message..">
+        </form>
       </div>
     </section>
 
@@ -72,6 +133,6 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
     <script src="./assets/js/firebase.js"></script>
-    <script src="./assets/js/user.js"></script>
+    <script src="./assets/js/messages.js"></script>
   </body>
 </html>

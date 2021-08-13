@@ -100,7 +100,7 @@ function showUserWishHandler(user){
   })
 }
 
-window.onload = setTimeout(events, 5000);
+window.onload = setTimeout(events, 3000);
 
 function events(){
   document.getElementById('wish_btn').addEventListener('click', WriteWish);
