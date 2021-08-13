@@ -201,7 +201,6 @@ function showChatsLeft(user,chatperson,chatid){
 
       const chatEl = document.createElement('div');
       chatEl.classList.add('mychats');
-      chatEl.id = "someID"
       chatEl.setAttribute("onclick", `changeURL("${chatperson}")`);
       chatEl.innerHTML = `
       <img src="${image}" alt="">

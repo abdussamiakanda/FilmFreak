@@ -959,6 +959,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   margin-top: 5px;
+  cursor: pointer;
 }
 
 .mychats:hover{
