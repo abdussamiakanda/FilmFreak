@@ -39,6 +39,7 @@ function checkAuthState(){
       showReqFriendsNum(user);
       updateChatsLeft(user);
       listenForMsg(user);
+      showMessageName();
     }else{
     alertMessage(type="danger", "You're logged out!")
     setTimeout(() => { window.location.replace("./index.html"); }, 2000);
@@ -161,11 +162,11 @@ function sendMessage(chatid,msg){
   database.ref('/messages/'+chatid+'/'+Date.now()).update({
     sender: userdata.uid,
     msg: msg,
-    time: date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric'}) + ", " + date.getDay() + ' ' + locale.month[date.getMonth()] + ' ' + date.getFullYear()
+    time: date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric'}) + ", " + date.getDate() + ' ' + locale.month[date.getMonth()] + ' ' + date.getFullYear()
   })
   database.ref('/messages/'+chatid).update({
     last: msg,
-    time: date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric'}) + ", " + date.getDay() + ' ' + locale.month[date.getMonth()] + ' ' + date.getFullYear()
+    time: date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric'}) + ", " + date.getDate() + ' ' + locale.month[date.getMonth()] + ' ' + date.getFullYear()
   })
   updateChatsLeft(userdata);
 }
@@ -203,7 +204,7 @@ function showChatsLeft(user,chatperson,chatid){
       chatEl.innerHTML = `
       <img src="${image}" alt="">
       <div class="cont">
-        <h5>${name}</h5><span>${lasttime}</span>
+        <h5>${name}</h5><span class="cont-span">${lasttime}</span>
         <p>${lastmsg}</p>
       </div>
       `
@@ -212,9 +213,17 @@ function showChatsLeft(user,chatperson,chatid){
   })
 }
 
+function showMessageName(){
+  database.ref('/'+profileId+'/profile').once("value").then((snapshot) => {
+    var name = snapshot.child('name').val();
+    document.getElementById('showMessageName').innerHTML = `${name}`;
+  })
+}
+
 
 // listen for incoming messages
 function listenForMsg(user){
+  document.getElementById("message_contents").innerHTML = "";
   database.ref('/'+user.uid+'/friends/'+profileId).once("value").then((snapshot) => {
     var chatid = snapshot.child('chatid').val();
 
