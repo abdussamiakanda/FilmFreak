@@ -201,6 +201,8 @@ function showChatsLeft(user,chatperson,chatid){
 
       const chatEl = document.createElement('div');
       chatEl.classList.add('mychats');
+      chatEl.id = "someID"
+      chatEl.setAttribute("onclick", `changeURL("${chatperson}")`);
       chatEl.innerHTML = `
       <img src="${image}" alt="">
       <div class="cont">
@@ -220,6 +222,11 @@ function showMessageName(){
   })
 }
 
+function changeURL(id){
+  window.location.search = "id="+id;
+}
+
+//
 
 // listen for incoming messages
 function listenForMsg(user){
