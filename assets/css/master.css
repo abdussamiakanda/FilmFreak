@@ -10,7 +10,10 @@
     max-width: 100%;
   }
 }
-
+html{
+  height:100%;
+  width:100%;
+}
 body{
   font-family: 'Chakra Petch';
   background-color: var(--no1);
@@ -18,6 +21,8 @@ body{
   font-size: 20px;
   margin: 0;
   padding: 0;
+  height:100%;
+  width:100%;
 }
 
 a{
@@ -802,13 +807,14 @@ input:checked + .slider:before {
   margin-top: 30px 2px 10px 2px;
   display: flex;
   justify-content: center;
+  height: 85%;
 }
 
 .message-left{
   width: 30%;
   background-color: #3f3f56;
   padding: 10px;
-  height: 80vh;
+  height: 100%;
   border-radius: 5px;
   margin: 2px;
 }
@@ -816,20 +822,24 @@ input:checked + .slider:before {
   width: 70%;
   background-color: #3f3f56;
   padding: 10px;
-  height: 80vh;
+  height: 100%;
   border-radius: 5px;
   margin: 2px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .message-contents{
   overflow: scroll;
   overflow-x: hidden;
-  height: 60vh;
   background-color: rgba(255,255,255,0.1);
   border-radius: 5px;
   padding: 10px;
-  margin-top: 5px;
+  margin: 10px;
+  width: 98%;
+  height: inherit;
 }
 ::-webkit-scrollbar {
   width: 5px;
@@ -843,10 +853,21 @@ input:checked + .slider:before {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.message-head{
+  background-color: var(--no1);
+  padding: 10px;
+  width: 98%;
 
+}
+.formaa{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .chat-input{
-  width: 90%;
-  height: 8vh;
+  width: 85%;
+  height: 50px;
   margin-top: 5px;
   font-size: 20px;
   font-family: 'Chakra Petch';
@@ -861,6 +882,20 @@ input:checked + .slider:before {
 }
 .chat-input:hover {
   background-color: #ddd;
+}
+.submit-msg{
+  height:50px;
+  width: 10%;
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.submit-msg:hover{
+  background-color: black;
+  color: white;
 }
 
 .you{

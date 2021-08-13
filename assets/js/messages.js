@@ -1,3 +1,7 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const profileId = urlParams.get('id');
+
 var provider = new firebase.auth.GoogleAuthProvider();
 var database = firebase.database();
 
@@ -6,8 +10,6 @@ var userdata = null;
 const API_KEY = "api_key=bef5eb55028208771a057a3a652b8632";
 const BASE_URL = "https://api.themoviedb.org/3"
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
-
-
 
 document.getElementById('login').addEventListener('click', GoogleLogin);
 document.getElementById('logout').addEventListener('click', LogoutUser);
@@ -111,6 +113,23 @@ function showNumber(num){
     <i class="badge-dot fa fa-circle" aria-hidden="true"></i>
   `
 }
+
+document.getElementById("send_message").onclick = function (){
+  console.log('p')
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function alertMessage(type="success", message){

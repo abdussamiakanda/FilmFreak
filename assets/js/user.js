@@ -267,6 +267,13 @@ function showNumber(num){
 }
 
 
+document.getElementById("msg_btn").onclick = function (){
+  window.location.assign("./messages.html?id="+profileId);
+}
+
+
+
+
 function alertMessage(type="success", message){
     let x = document.getElementById("alerts")
     let content = ``
