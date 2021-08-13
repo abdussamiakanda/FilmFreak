@@ -943,7 +943,14 @@ input:checked + .slider:before {
 }
 .cont{
   padding: 10px;
+  position: relative;
+  width: 100%;
 }
+.cont span{
+  font-size: 10px;
+  float: right;
+}
+
 .mychats{
   background-color: var(--no1);
   color: white;
@@ -951,6 +958,7 @@ input:checked + .slider:before {
   padding: 5px;
   display: flex;
   align-items: center;
+  margin-top: 5px;
 }
 
 .mychats:hover{

@@ -38,7 +38,7 @@ function checkAuthState(){
       PublicProfileHandler(user);
       showReqFriendsNum(user);
       updateChatsLeft(user);
-      document.title = "Messages - FilmFreak";
+      listenForMsg(user);
     }else{
     alertMessage(type="danger", "You're logged out!")
     setTimeout(() => { window.location.replace("./index.html"); }, 2000);
@@ -163,7 +163,11 @@ function sendMessage(chatid,msg){
     msg: msg,
     time: date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric'}) + ", " + date.getDay() + ' ' + locale.month[date.getMonth()] + ' ' + date.getFullYear()
   })
-  console.log();
+  database.ref('/messages/'+chatid).update({
+    last: msg,
+    time: date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric'}) + ", " + date.getDay() + ' ' + locale.month[date.getMonth()] + ' ' + date.getFullYear()
+  })
+  updateChatsLeft(userdata);
 }
 
 locale = {
@@ -171,6 +175,7 @@ locale = {
 };
 
 function updateChatsLeft(user){
+  document.getElementById('chats').innerHTML = ``
   database.ref('/'+user.uid+'/friends/').orderByKey().once("value").then((snapshot) => {
     snapshot.forEach(function(childSnapshot){
       database.ref('/'+user.uid+'/friends/'+childSnapshot.key).once("value").then((snapshot) => {
@@ -185,20 +190,63 @@ function updateChatsLeft(user){
 }
 
 function showChatsLeft(user,chatperson,chatid){
-  database.ref('/messages/'+chatid).orderByKey().limitToLast(1).once("value").then((snapshot) => {
-    var msg = snapshot.child('msg').val();
-    var chatid = snapshot.child('chatid').val();
-    var time = snapshot.child('time').val();
-    console.log(msg,chatid,time);
+  database.ref('/'+chatperson+'/profile').once("value").then((snapshot) => {
+    var image = snapshot.child('image').val();
+    var name = snapshot.child('name').val();
+
+    database.ref('/messages/'+chatid).once("value").then((snapshot) => {
+      var lastmsg = snapshot.child('last').val();
+      var lasttime = snapshot.child('time').val();
+
+      const chatEl = document.createElement('div');
+      chatEl.classList.add('mychats');
+      chatEl.innerHTML = `
+      <img src="${image}" alt="">
+      <div class="cont">
+        <h5>${name}</h5><span>${lasttime}</span>
+        <p>${lastmsg}</p>
+      </div>
+      `
+      document.getElementById('chats').appendChild(chatEl);
+    })
   })
 }
 
 
+// listen for incoming messages
+function listenForMsg(user){
+  database.ref('/'+user.uid+'/friends/'+profileId).once("value").then((snapshot) => {
+    var chatid = snapshot.child('chatid').val();
 
-
-
-
-
+    database.ref('/messages/'+chatid).on('child_added', function (snapshot){
+      var sender = snapshot.val().sender
+      if(sender === user.uid && snapshot.key !== "last" && snapshot.key !== "time"){
+        var html = ""
+        html = `
+        <div class="you">
+          <div class="your-chat-content">
+            ${snapshot.val().msg}<span>${snapshot.val().time}</span>
+          </div>
+        </div>
+        `
+      }else if(sender === profileId && snapshot.key !== "last" && snapshot.key !== "time"){
+        var html = ""
+        html = `
+        <div class="friend">
+          <div class="chat-content">
+            ${snapshot.val().msg}<span>${snapshot.val().time}</span>
+          </div>
+        </div>
+        `
+      }else if(snapshot.key === "last" || snapshot.key === "time"){
+        html = ""
+      }
+      document.getElementById("message_contents").innerHTML += html;
+      var element = document.getElementById("message_contents");
+      element.scrollTop = element.scrollHeight;
+    })
+  })
+}
 
 
 
