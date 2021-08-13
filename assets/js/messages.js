@@ -37,6 +37,7 @@ function checkAuthState(){
       showUserData(user);
       PublicProfileHandler(user);
       showReqFriendsNum(user);
+      updateChatsLeft(user);
       document.title = "Messages - FilmFreak";
     }else{
     alertMessage(type="danger", "You're logged out!")
@@ -114,14 +115,83 @@ function showNumber(num){
   `
 }
 
+
+var form = document.getElementById("msg_form");
+function handleForm(event) {
+  event.preventDefault();
+  var msg = document.getElementById('chat_msg');
+  checkMsgId(msg.value);
+  msg.value = '';
+}
+form.addEventListener('submit', handleForm);
+
 document.getElementById("send_message").onclick = function (){
-  console.log('p')
+  var msg = document.getElementById('chat_msg')
+  checkMsgId(msg.value);
+  msg.value = '';
+  return false;
 }
 
+function checkMsgId(msg){
+  database.ref('/'+userdata.uid+'/friends/'+profileId).once("value").then((snapshot) => {
+    var chatId = snapshot.child("chatid").val();
+    var localchatid = null;
 
+    if (!chatId){
+      database.ref('/'+userdata.uid+'/friends/'+profileId).update({
+        chatid: userdata.uid + profileId
+      })
+      database.ref('/'+profileId+'/friends/'+userdata.uid).update({
+        chatid: userdata.uid + profileId
+      })
+      database.ref('/'+profileId+'/friends/'+userdata.uid).update({
+        chatid: userdata.uid + profileId
+      })
 
+      localchatid = userdata.uid + profileId;
+    }else(
+      localchatid = chatId
+    )
+    sendMessage(localchatid,msg);
+  })
+}
 
+function sendMessage(chatid,msg){
+  var date = new Date();
+  database.ref('/messages/'+chatid+'/'+Date.now()).update({
+    sender: userdata.uid,
+    msg: msg,
+    time: date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric'}) + ", " + date.getDay() + ' ' + locale.month[date.getMonth()] + ' ' + date.getFullYear()
+  })
+  console.log();
+}
 
+locale = {
+  month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+};
+
+function updateChatsLeft(user){
+  database.ref('/'+user.uid+'/friends/').orderByKey().once("value").then((snapshot) => {
+    snapshot.forEach(function(childSnapshot){
+      database.ref('/'+user.uid+'/friends/'+childSnapshot.key).once("value").then((snapshot) => {
+        var chatid = snapshot.child('chatid').val();
+
+        if (chatid !== null){
+          showChatsLeft(user,childSnapshot.key,chatid);
+        }
+      })
+    })
+  })
+}
+
+function showChatsLeft(user,chatperson,chatid){
+  database.ref('/messages/'+chatid).orderByKey().limitToLast(1).once("value").then((snapshot) => {
+    var msg = snapshot.child('msg').val();
+    var chatid = snapshot.child('chatid').val();
+    var time = snapshot.child('time').val();
+    console.log(msg,chatid,time);
+  })
+}
 
 
 
